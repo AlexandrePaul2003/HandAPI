@@ -19,6 +19,17 @@ namespace APIHand.Services
                 throw ex;
             }
         }
+        public static async Task<List<GaleryPicture>> GetGaleryPicturesBySubjectPk(int subject_pk)
+        {
+            try
+            {
+                return await context.GaleryPicture.Where(p => p.GallerySubject_PK == subject_pk).ToListAsync<GaleryPicture>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /*public static async Task<GalerySubject> GetOneGaleryPictures(int galery_pk)
         {
             try

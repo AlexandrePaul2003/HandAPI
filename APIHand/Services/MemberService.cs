@@ -45,7 +45,9 @@ namespace APIHand.Services
         {
             try
             {
-                member.Order = context.Members.Max(m => m.Order) + 1;
+                
+                if (context.Members.Count() > 0) member.Order = context.Members.Max(m => m.Order) + 1; else member.Order = 0;
+                Console.WriteLine("membre " + member.Order);
                 await context.Members.AddAsync(member);
                 context.SaveChanges();
             }

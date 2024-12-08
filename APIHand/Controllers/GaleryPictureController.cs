@@ -25,6 +25,31 @@ namespace APIHand.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [ActionName("BySubject")]
+        public async Task<IActionResult> GetGaleryPicturesBySubject(int subject_pk)
+        {
+            try
+            {
+                List<GaleryPicture> commands ;
+                if (subject_pk > 0)
+                {
+                    if (GallerySubjectService.GetOneGalerySubjects(subject_pk) == null) return NotFound();
+                    commands = await GaleryPictureService.GetGaleryPicturesBySubjectPk(subject_pk);
+
+                }
+                else
+                {
+                    commands = await GaleryPictureService.GetAllGaleryPictures();
+                }
+                if (commands.Count == 0) return NoContent();
+                else return Ok(commands);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 
         [HttpPost]
