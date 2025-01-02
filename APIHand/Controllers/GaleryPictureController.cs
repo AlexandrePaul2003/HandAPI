@@ -16,9 +16,24 @@ namespace APIHand.Controllers
         {
             try
             {
-                List<GaleryPicture> commands = await GaleryPictureService.GetAllGaleryPictures();
-                if (commands.Count == 0) return NoContent();
-                else return Ok(commands);
+                List<GaleryPicture> pictures = await GaleryPictureService.GetAllGaleryPictures();
+                if (pictures.Count == 0) return NoContent();
+                else return Ok(pictures);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [ActionName("One")]
+        public async Task<IActionResult> GetGaleryPictureById(int picture_pk)
+        {
+            try
+            {
+                GaleryPicture picture = await GaleryPictureService.GetOneGaleryPictures(picture_pk);
+                if (picture == null) return NotFound();
+                else return Ok(picture);
             }
             catch (Exception ex)
             {
@@ -32,7 +47,7 @@ namespace APIHand.Controllers
             try
             {
                 List<GaleryPicture> commands ;
-                if (subject_pk > 0)
+                if (subject_pk > -1)
                 {
                     if (GallerySubjectService.GetOneGalerySubjects(subject_pk) == null) return NotFound();
                     commands = await GaleryPictureService.GetGaleryPicturesBySubjectPk(subject_pk);

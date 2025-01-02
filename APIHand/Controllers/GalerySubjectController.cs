@@ -25,7 +25,21 @@ namespace APIHand.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpGet]
+        [ActionName("One")]
+        public async Task<IActionResult> GetGalerySubjectById(int subject_pk)
+        {
+            try
+            {
+                GalerySubject subject = await GallerySubjectService.GetOneGalerySubject(subject_pk);
+                if (subject == null) return NotFound();
+                else return Ok(subject);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         [HttpPost]
         [ActionName("Create")]

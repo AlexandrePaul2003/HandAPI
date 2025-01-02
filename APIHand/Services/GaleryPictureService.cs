@@ -30,17 +30,17 @@ namespace APIHand.Services
                 throw ex;
             }
         }
-        /*public static async Task<GalerySubject> GetOneGaleryPictures(int galery_pk)
+        public static async Task<GaleryPicture> GetOneGaleryPictures(int picutre_pk)
         {
             try
             {
-                return await context.GalerySubjects.FindAsync(galery_pk);
+                return await context.GaleryPicture.FindAsync(picutre_pk);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }*/
+        }
         public static async Task AddGaleryPicture(GaleryPicture picture)
         {
             try

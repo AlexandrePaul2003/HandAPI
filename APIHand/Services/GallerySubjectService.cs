@@ -20,6 +20,17 @@ namespace APIHand.Services
                 throw ex;
             }
         }
+        public static async Task<GalerySubject> GetOneGalerySubject(int subject_pk)
+        {
+            try
+            {
+                return await context.GalerySubjects.FindAsync(subject_pk);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static async Task<GalerySubject> GetOneGalerySubjects(int galery_pk)
         {
             try
